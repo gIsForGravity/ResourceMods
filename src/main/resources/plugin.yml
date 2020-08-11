@@ -1,0 +1,4 @@
+name: ResourceMods
+version: 1.0.0b1-SNAPSHOT
+main: net.almostmc.ResourceMods.CraftPlugin
+api-version: "1.16"
