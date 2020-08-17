@@ -3,7 +3,6 @@ package net.almostmc.ResourceMods;
 import net.almostmc.ResourceMods.Database.DBManagerH2;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -16,7 +15,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * Main class
+ * Plugin Main class
  */
 public class CraftPlugin extends JavaPlugin {
     public static final String NMS_VERSION = Bukkit.getServer().getClass().getPackage().getName().substring(23);
@@ -40,10 +39,6 @@ public class CraftPlugin extends JavaPlugin {
         // Hashmap of all custom materials located by pluginName.blockID similarly to Minecraft's builtin namespace:blockID
         private HashMap<String, HashMap<String, ResourceMaterial>> resourceMapById;
 
-        // Hashmap of all custom materials located by base material that is replaced and the CustomModelData integer. Used
-        // for getting custom materials by position.
-        private HashMap<Material, HashMap<Integer, ResourceMaterial>> resourceMapByModel;
-
         @Override
         public ResourceMaterial registerBlock(Plugin plugin, String blockID, Model itemModel, Model blockModel) {
             ResourceMaterial mat = new ResourceMaterial(plugin.getName(), blockID, itemModel, blockModel);
@@ -51,10 +46,6 @@ public class CraftPlugin extends JavaPlugin {
             HashMap<String, ResourceMaterial> idMap = new HashMap<>();
             idMap.put(blockID, mat);
             resourceMapById.put(mat.pluginName, idMap);
-
-            HashMap<Integer, ResourceMaterial> modelMap = new HashMap<>();
-            modelMap.put(itemModel.CustomModelData, mat);
-            resourceMapByModel.put(itemModel.customModelDataMaterial, modelMap);
 
             return mat;
         }
